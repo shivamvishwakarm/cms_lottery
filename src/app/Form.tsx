@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Switch } from 'antd';
 
 interface FormProps {
     // Define your props here
@@ -18,8 +19,27 @@ const Form: React.FC<FormProps> = () => {
     const [isSubmitted, setIsSubmitted] = useState<any>(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLotteryOn, setIsLotteryOn] = useState(false);
+  
 
+    const handleCheckboxChange = async (checked: boolean) => {
+      setIsLoading(true);
+      console.log(checked);
+      try {
+        const response = await axios.patch('/api/setStatus', {
+          status: checked
+        });
+        setIsLotteryOn(checked);
+        console.log(response.data);
+        alert(checked ? 'The lottery has started.' : 'The lottery has ended.');
 
+      } catch (error) {
+        // Handle error here...
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +86,14 @@ const Form: React.FC<FormProps> = () => {
         }
       };
     return (
+      <> 
+       <label className="flex items-center space-x-2">
+       <Switch
+  checked={isLotteryOn}
+  onChange={handleCheckboxChange}
+/>
+      <span className="text-gray-700">Start The Lottery</span>
+    </label>
         <form className="flex flex-col p-6 space-y-4 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
             <label className="flex flex-col space-y-1">
                 <span className="text-gray-700">Mobile Number:</span>
@@ -88,7 +116,7 @@ const Form: React.FC<FormProps> = () => {
 
             <button className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none" type="submit" disabled={isLoading}>
       {isLoading ? 'Loading...' : 'Submit'}
-    </button>        </form>
+    </button>        </form> </>
     );
 };
 
