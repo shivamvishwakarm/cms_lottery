@@ -19,6 +19,10 @@ const  lotterySchema = new Schema({
     type: String,
     require: true,
   },
+  winPrice: {
+    type: Number,
+    require: true,
+  }
 })
 
 const Lottery = models.Lottery || model('Lottery', lotterySchema);

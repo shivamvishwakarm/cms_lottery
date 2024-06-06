@@ -12,7 +12,8 @@ const Form: React.FC<FormProps> = () => {
         mobileno: '',
         name: '',
         ticketno: '',
-        withdrawaldate: ''
+        withdrawaldate: '',
+        winPrice: ''
     };
     
     const [formData, setFormData] = useState(initialFormData);
@@ -106,6 +107,10 @@ const Form: React.FC<FormProps> = () => {
             <label className="flex flex-col space-y-1">
                 <span className="text-gray-700">Ticket Number:</span>
                 <input className="border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500" type="text" name="ticketno" value={formData.ticketno || ''} onChange={handleInputChange} />
+            </label>
+            <label className="flex flex-col space-y-1">
+                <span className="text-gray-700">Wining price:</span>
+                <input className="border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500" type="text" name="winPrice" value={formData.winPrice || ''} onChange={handleInputChange} />
             </label>
             <label className="flex flex-col space-y-1">
                 <span className="text-gray-700">Withdrawal Date:</span>
