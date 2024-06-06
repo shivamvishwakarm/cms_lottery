@@ -13,11 +13,11 @@ const submitHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 
   if (req.method === 'POST') {
-    const { mobileno, name, ticketno, withdrawaldate } = req.body;
+    const { mobileno, name, ticketno, withdrawaldate, winPrice } = req.body;
     console.log(req.body)
 
     // Validate input
-    if (!mobileno || !name || !ticketno || !withdrawaldate) {
+    if (!mobileno || !name || !ticketno || !withdrawaldate || !winPrice) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -26,6 +26,7 @@ const submitHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         mobileno: mobileno,
         name: name,
         ticket: ticketno,
+        winPrice: winPrice,
         date: new Date(withdrawaldate)
       });
 

@@ -52,7 +52,7 @@ const Form: React.FC<FormProps> = () => {
         setIsLoading(true);
       
         // Basic form validation
-        if (!formData.mobileno || !formData.name || !formData.ticketno) {
+        if (!formData.mobileno || !formData.name || !formData.ticketno || !formData.withdrawaldate || !formData.winPrice) {
           alert('Please fill all fields');
           setIsLoading(false);
           return;
